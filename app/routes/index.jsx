@@ -1,12 +1,11 @@
-import { useLoaderData, json } from "remix";
+import { useLoaderData, json, Link } from "remix";
 import { MeiliSearch } from "meilisearch";
-import { useState } from "react";
 import { Star } from "~/Icons";
 import { Tomato } from "~/Icons";
 
 const getRandomInt = (max) => Math.floor(Math.random() * (max - 1 + 1)) + 1;
 
-const getEpisode = async () => {
+export let loader = async () => {
   const client = new MeiliSearch({
     host: "https://search.selfhostedfuckery.pw/",
     apiKey: process.env.API_KEY,
@@ -17,12 +16,6 @@ const getEpisode = async () => {
   const id = getRandomInt(numberOfDocuments);
 
   const data = await index.getDocument(id);
-
-  return data;
-};
-
-export let loader = async () => {
-  const data = await getEpisode();
   return json(data);
 };
 
@@ -35,13 +28,7 @@ export let meta = () => {
 };
 
 export default function Index() {
-  let data = useLoaderData();
-  const [episode, setEpisode] = useState(data);
-
-  const getRandomEpisode = async () => {
-    const data = await getEpisode();
-    setEpisode(data);
-  };
+  let episode = useLoaderData();
 
   return (
     <main>
@@ -60,7 +47,9 @@ export default function Index() {
         </div>
       </h6>
       <article dangerouslySetInnerHTML={{ __html: episode.summary }}></article>
-      <button onClick={getRandomEpisode}>Give me another</button>
+      <Link to="/" reloadDocument>
+        <button>Give me another</button>
+      </Link>
     </main>
   );
 }
