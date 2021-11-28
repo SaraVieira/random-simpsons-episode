@@ -1,4 +1,4 @@
-import { useLoaderData, json, Link } from "remix";
+import { useLoaderData, json } from "remix";
 import { MeiliSearch } from "meilisearch";
 import { useState } from "react";
 import { Star } from "~/Icons";
