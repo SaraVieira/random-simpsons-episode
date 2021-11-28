@@ -11,7 +11,28 @@ import globalStylesUrl from "~/styles/global.css";
 import { Waves } from "./Icons";
 
 export let links = () => {
-  return [{ rel: "stylesheet", href: globalStylesUrl }];
+  return [
+    { rel: "stylesheet", href: globalStylesUrl },
+    {
+      rel: "apple-touch-icon",
+      sizes: "180x180",
+      href: "/apple-touch-icon.png",
+    },
+    {
+      rel: "icon",
+      sizes: "32x32",
+      href: "/favicon-32x32.png",
+    },
+    {
+      rel: "icon",
+      sizes: "16x16",
+      href: "/favicon-16x16.png",
+    },
+    {
+      rel: "manifest",
+      href: "/site.webmanifest",
+    },
+  ];
 };
 
 export default function App() {
@@ -30,6 +51,8 @@ function Document({ children, title }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff"></meta>
         {title ? <title>{title}</title> : null}
         <Meta />
         <Links />
