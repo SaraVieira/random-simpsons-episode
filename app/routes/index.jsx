@@ -37,7 +37,7 @@ export default function Index() {
       <h3>
         S{episode.season}E{episode.number}
       </h3>
-      <img src={episode.image.original} alt={episode.name} />
+      <img src={episode.image?.original} alt={episode.name} />
 
       <h6>
         Rating: {episode.rating}/10
